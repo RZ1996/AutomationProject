@@ -14,13 +14,6 @@ public class SubmitOrder extends BaseTest {
         Payment payment = order.chooseProduct();
         FinishedOrder finishedOrder = payment.paymentFlow();
         finishedOrder.singOut();
-
-
-
-
-
-
-
     }
 
 }

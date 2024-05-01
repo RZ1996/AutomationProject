@@ -12,5 +12,6 @@ public class DeleteOrder extends BaseTest {
         FinishedOrder finishedOrder = payment.paymentFlow();
         OrderList orderList = finishedOrder.viewOrderList();
         orderList.deleteOrder();
+
     }
 }

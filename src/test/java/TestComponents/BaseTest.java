@@ -1,5 +1,4 @@
 package TestComponents;
-
 import PageObjects.Login;
 import PageObjects.Registration;
 import PageObjects.User;
@@ -10,7 +9,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -33,7 +31,7 @@ public class BaseTest {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
             driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         }
         else if (browserName.equalsIgnoreCase("firefox")){
             WebDriverManager.firefoxdriver().setup();
@@ -52,7 +50,7 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public Login launchApplication() throws IOException {
+    public Login launchApplication() throws IOException{
         driver = initialazeDriver();
         user = new User();
         registration = new Registration(driver, user);

@@ -1,5 +1,4 @@
 package PageObjects;
-
 import AbstractComponents.AbstractComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -17,6 +16,5 @@ public class FinishedOrder extends AbstractComponent {
         return new OrderList(driver);
     }
     public void singOut(){clickOnSignOutButton();}
-    public void home(){clickOnHomeButton();}
 
 }
