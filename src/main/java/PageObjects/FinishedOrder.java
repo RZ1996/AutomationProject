@@ -11,7 +11,7 @@ public class FinishedOrder extends AbstractComponent {
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }
-    public OrderList viewOrder() throws InterruptedException {
+    public OrderList viewOrderList() throws InterruptedException {
         waitForElementToDisappear();
         clickOnOrderButton();
         return new OrderList(driver);

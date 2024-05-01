@@ -3,17 +3,14 @@ import PageObjects.*;
 import TestComponents.BaseTest;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
-
 public class DeleteOrder extends BaseTest {
 
     @Test
-    public void deleteOrder() throws IOException, InterruptedException {
-        Login login = launchApplication();
-        Order order = login.loginUserWithNewOrder();
+    public void deleteOrder() throws  InterruptedException {
+        Order order = new Login(driver,user).loginUserWithNewOrder();
         Payment payment = order.chooseProduct();
-        FinishedOrder finishedOrder = payment.payment();
-        OrderList orderList =  finishedOrder.viewOrder();
+        FinishedOrder finishedOrder = payment.paymentFlow();
+        OrderList orderList = finishedOrder.viewOrderList();
         orderList.deleteOrder();
     }
 }

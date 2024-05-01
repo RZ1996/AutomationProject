@@ -24,7 +24,7 @@ public class Payment {
     WebElement placeOrder;
 
 
-    public FinishedOrder payment(){
+    public FinishedOrder paymentFlow(){
         cvvInput.sendKeys("100");
         Actions a = new Actions(driver);
         a.sendKeys(countrySelect, "Czech Republic").build().perform();

@@ -1,20 +1,26 @@
 package TestCases;
-import PageObjects.*;
+import PageObjects.FinishedOrder;
+import PageObjects.Login;
+import PageObjects.Order;
+import PageObjects.Payment;
 import TestComponents.BaseTest;
 import org.testng.annotations.Test;
-
-import java.io.IOException;
 
 public class SubmitOrder extends BaseTest {
 
     @Test
-    public void submitOrder() throws IOException, InterruptedException {
-        Login login = launchApplication();
-        Order order = login.loginUserWithNewOrder();
+    public void submitOrder() throws  InterruptedException {
+        Order order = new Login(driver,user).loginUserWithNewOrder();
         Payment payment = order.chooseProduct();
-        FinishedOrder finishedOrder = payment.payment();
-        finishedOrder.home();
+        FinishedOrder finishedOrder = payment.paymentFlow();
         finishedOrder.singOut();
+
+
+
+
+
+
+
     }
 
 }

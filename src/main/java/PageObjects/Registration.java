@@ -58,7 +58,7 @@ public class Registration  {
         user.email = userEmail;
     }
 
-    public Login registrationOfUser(){
+    public void registrationOfUser(){
         driver.get(url);
         registrationButton.click();
         firstNameInput.sendKeys(user.firstName);
@@ -77,8 +77,6 @@ public class Registration  {
         checkBox.click();
         registerButton.click();
         loginButton.click();
-        return new Login(driver,user);
-
     }
 
 }
