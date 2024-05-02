@@ -46,7 +46,6 @@ public class BaseTest {
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
         return driver;
-
     }
 
     @BeforeMethod
@@ -54,7 +53,6 @@ public class BaseTest {
         driver = initialazeDriver();
         user = new User();
         registration = new Registration(driver, user);
-        registration.getEmail();
         registration.registrationOfUser();
         return new Login(driver,user);
     }
@@ -63,6 +61,5 @@ public class BaseTest {
     public void closeApplication(){
         driver.quit();
     }
-
 
 }

@@ -26,6 +26,69 @@ public class Order extends AbstractComponent {
     WebElement addToCartButton;
     @FindBy(xpath ="//button[text()='Checkout']")
     WebElement checkOutButton;
+    @FindBy(xpath ="//div[@class='py-2 border-bottom ml-3']/input")
+    WebElement searchInput;
+    @FindBy(xpath =" //div[@class='py-2 border-bottom ml-3'][2]/div[@class='row']/div/input[@name='minPrice']")
+    WebElement minPriceInput;
+    @FindBy(xpath ="//div[@class='py-2 border-bottom ml-3'][2]/div[@class='row']/div/input[@name='maxPrice']")
+    WebElement maxPriceInput;
+    @FindBy(xpath ="//div[@class='py-2 border-bottom ml-3'][3]/div[@class='form-group ng-star-inserted'][1]/input")
+    WebElement fashionCheckBox;
+    @FindBy(xpath ="//div[@class='py-2 border-bottom ml-3'][3]/div[@class='form-group ng-star-inserted'][2]/input")
+    WebElement electronicsCheckBox;
+    @FindBy(xpath ="//div[@class='py-2 border-bottom ml-3'][3]/div[@class='form-group ng-star-inserted'][3]/input")
+    WebElement houseHoldCheckBox;
+    @FindBy(xpath ="//div[@class='py-2 border-bottom ml-3'][4]/div[@class='form-group ng-star-inserted'][1]/input")
+    WebElement tshirtsCheckBox;
+    @FindBy(xpath ="//div[@class='py-2 border-bottom ml-3'][4]/div[@class='form-group ng-star-inserted'][2]/input")
+    WebElement shirtsCheckBox;
+    @FindBy(xpath ="//div[@class='py-2 border-bottom ml-3'][4]/div[@class='form-group ng-star-inserted'][3]/input")
+    WebElement shoesCheckBox;
+    @FindBy(xpath ="//div[@class='py-2 border-bottom ml-3'][4]/div[@class='form-group ng-star-inserted'][4]/input")
+    WebElement mobilesCheckBox;
+    @FindBy(xpath ="//div[@class='py-2 border-bottom ml-3'][4]/div[@class='form-group ng-star-inserted'][5]/input")
+    WebElement laptopsCheckBox;
+    @FindBy(xpath ="//div[@class='py-2 ml-3']/div[@class='form-group ng-star-inserted']/input")
+    WebElement menCheckBox;
+    @FindBy(xpath ="//div[@class='py-2 ml-3']/div[@class='form-group ng-star-inserted'][2]/input")
+    WebElement womanCheckBox;
+
+    public void clickOnFields() throws InterruptedException {
+        for(int i = 0; i < 3; i ++){
+            searchInput.sendKeys(sortiments[i]);
+            waitForElementToDisappear();
+            searchInput.clear();
+            waitForElementToDisappear();
+        }
+        searchInput.clear();
+        waitForElementToDisappear();
+        minPriceInput.sendKeys("0");
+        maxPriceInput.sendKeys("300000");
+        fashionCheckBox.click();
+        electronicsCheckBox.click();
+        houseHoldCheckBox.click();
+        tshirtsCheckBox.click();
+        shirtsCheckBox.click();
+        shoesCheckBox.click();
+        mobilesCheckBox.click();
+        laptopsCheckBox.click();
+        menCheckBox.click();
+        womanCheckBox.click();
+    }
+    public void unClickFields(){
+        minPriceInput.clear();
+        maxPriceInput.clear();
+        fashionCheckBox.click();
+        electronicsCheckBox.click();
+        houseHoldCheckBox.click();
+        tshirtsCheckBox.click();
+        shirtsCheckBox.click();
+        shoesCheckBox.click();
+        mobilesCheckBox.click();
+        laptopsCheckBox.click();
+        menCheckBox.click();
+        womanCheckBox.click();
+    }
 
     public Payment chooseProduct() throws InterruptedException {
         products = driver.findElements(By.cssSelector(".mb-3"));

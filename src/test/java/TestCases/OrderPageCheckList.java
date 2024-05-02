@@ -7,6 +7,5 @@ public class OrderPageCheckList extends BaseTest {
     @Test
     public void verifyOrderPage(){
         new Login(driver,user).loginUserWithNewOrder();
-
     }
 }
