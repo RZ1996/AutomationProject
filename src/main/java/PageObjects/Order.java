@@ -72,8 +72,11 @@ public class Order extends AbstractComponent {
         shoesCheckBox.click();
         mobilesCheckBox.click();
         laptopsCheckBox.click();
+        scrollDownPage();
+        waitForElementToDisappear();
         menCheckBox.click();
         womanCheckBox.click();
+        waitForElementToDisappear();
     }
     public void unClickFields(){
         minPriceInput.clear();
