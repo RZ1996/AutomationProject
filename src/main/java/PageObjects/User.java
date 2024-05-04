@@ -7,7 +7,10 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.Normalizer;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class User {
     protected  String firstName;
@@ -45,14 +48,28 @@ public class User {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         Random random = new Random();
         JSONObject user = responseData.getJSONArray("results").getJSONObject(0);
-        firstName = user.getJSONObject("name").getString("first");
-        lastName = user.getJSONObject("name").getString("last");
+        String originalFirstName = user.getJSONObject("name").getString("first");
+        String originalLastName = user.getJSONObject("name").getString("last");
+
+        firstName = filterEuropeanCharacters(originalFirstName);
+        lastName = filterEuropeanCharacters(originalLastName);
+
         password = "Sp123iunwc";
         phoneNumber = "7007007001";
         occupationValue = occupationsRoles[random.nextInt(occupationsRoles.length)];
     }
 
-
+    private String filterEuropeanCharacters(String input) {
+        String normalized = Normalizer.normalize(input, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InBasicLatin}|\\s");
+        Matcher matcher = pattern.matcher(normalized);
+        StringBuilder builder = new StringBuilder();
+        while (matcher.find()) {
+            builder.append(matcher.group());
+        }
+        return builder.toString();
+    }
 }

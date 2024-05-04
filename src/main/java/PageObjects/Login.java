@@ -30,6 +30,13 @@ public class Login extends Registration {
         return new Order(driver);
     }
 
+    public void loginWithRegisteredAccount(){
+        driver.get(url);
+        emailInput.sendKeys(user.email);
+        passwordInput.sendKeys(user.password);
+        loginButton.click();
+    }
+
 
 
 }

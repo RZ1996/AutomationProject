@@ -15,7 +15,7 @@ public class Registration  {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         this.user = user;
-        user.email = user.firstName + user.lastName +"@example.com";
+        user.email = user.firstName+user.lastName+"@example.com";
     }
 
     @FindBy(xpath ="//p[contains(@class, 'text')]")
