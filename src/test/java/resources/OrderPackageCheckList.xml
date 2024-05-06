@@ -5,7 +5,7 @@
     </listeners>
     <test name="SubmitOrder">
         <classes>
-            <class name="TestCases.SubmitOrder"/>
+            <class name="TestCases.OrderPageCheckList"/>
         </classes>
     </test>
 </suite>
