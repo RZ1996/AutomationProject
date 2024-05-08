@@ -28,7 +28,7 @@ public abstract class BaseTest {
 
 
         Properties prop = new Properties();
-        FileInputStream stream = new FileInputStream("C:\\Users\\zamoc\\IdeaProjects\\Automation\\src\\main\\resources\\GlobalData.properties");
+        FileInputStream stream = new FileInputStream("C:\\Users\\zamoc\\IdeaProjects\\AutomationProject\\src\\main\\resources\\GlobalData.properties");
         prop.load(stream);
         String browserName = prop.getProperty("browser");
 
