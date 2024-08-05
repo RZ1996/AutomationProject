@@ -29,7 +29,7 @@ public class User {
         this.gender = random.nextBoolean() ? "Male" : "Female";
     }
 
-    public void userSetUp(){
+    private void userSetUp(){
         HttpClient client = HttpClients.createDefault();
         HttpGet request = new HttpGet("https://randomuser.me/api/");
         JSONObject responseData = null;

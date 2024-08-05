@@ -7,7 +7,6 @@ import TestComponents.BaseTest;
 import org.testng.annotations.Test;
 
 public class SubmitOrder extends BaseTest {
-
     @Test
     public void submitOrder() throws  InterruptedException {
         Order order = new Login(driver,user).loginUserWithNewOrder();
