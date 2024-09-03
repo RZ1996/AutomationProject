@@ -1,9 +1,6 @@
 package TestComponents;
-import PageObjects.Login;
-import PageObjects.Registration;
 import PageObjects.User;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -16,19 +13,19 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.io.FileHandler;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
 
-    public WebDriver driver;
-    public Registration registration;
-    public User user;
-    public WebDriver initialazeDriver() throws IOException {
+    protected WebDriver driver;
+    protected User user;
+    protected ArrayList<User> users = new ArrayList<User>();
+    protected WebDriver initialazeDriver() throws IOException {
 
 
         Properties prop = new Properties();
@@ -64,20 +61,19 @@ public abstract class BaseTest {
     }
 
     @BeforeMethod
-    public Login launchApplication() throws IOException{
+    protected void launchApplication() throws IOException{
         driver = initialazeDriver();
         user = new User();
-        registration = new Registration(driver, user);
-        registration.registrationOfUser();
-        return new Login(driver,user);
+        users.add(user);
+
     }
 
     @AfterMethod
-    public void closeApplication(){
+    protected void closeApplication(){
         driver.quit();
     }
 
-    public String getScreenShot(String testCaseName, WebDriver driver) throws IOException {
+    protected String getScreenShot(String testCaseName, WebDriver driver) throws IOException {
         String screenshotPath = null;
 
         try {

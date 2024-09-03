@@ -7,9 +7,9 @@ import org.openqa.selenium.support.ui.Select;
 
 public class Registration  {
 
-    protected WebDriver driver;;
+    protected WebDriver driver;
     protected final String url = "https://rahulshettyacademy.com/client";
-    private User user;
+    protected final User user;
 
     public Registration(WebDriver driver, User user){
         this.driver = driver;
