@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 
 public class Payment {
-    private  WebDriver driver;
+    private final WebDriver driver;
     public Payment(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);

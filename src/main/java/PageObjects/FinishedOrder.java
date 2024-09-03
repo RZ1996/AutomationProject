@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public class FinishedOrder extends AbstractComponent {
-    private WebDriver driver;
+    private final WebDriver driver;
     public FinishedOrder(WebDriver driver){
         super(driver);
         this.driver = driver;

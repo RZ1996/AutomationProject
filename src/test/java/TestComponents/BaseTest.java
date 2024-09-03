@@ -13,6 +13,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.io.FileHandler;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -77,12 +78,17 @@ public abstract class BaseTest {
     }
 
     public String getScreenShot(String testCaseName, WebDriver driver) throws IOException {
-        TakesScreenshot ts = (TakesScreenshot) this.driver;
-        File source = ts.getScreenshotAs(OutputType.FILE);
-        File file = new File(System.getProperty("user.dir") +"//reports//"+testCaseName+".png");
-        FileUtils.copyFile(source,file);
-        return System.getProperty("user.dir")+"//reports//"+testCaseName+".png";
+        String screenshotPath = null;
+
+        try {
+            File sourceFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File destinationFile = new File(System.getProperty("user.dir") + "\\reports\\" + testCaseName + ".png");
+            FileHandler.copy(sourceFile, destinationFile);
+            String[] relativePath = destinationFile.toString().split("reports");
+            screenshotPath = ".\\" + relativePath[1];
+        } catch (Exception e) {
+            System.out.println("Failure to take screenshot " + e);
+        }
+        return screenshotPath;
     }
-
-
 }
