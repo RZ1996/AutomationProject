@@ -6,10 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class OrderList extends AbstractComponent {
-    private final WebDriver driver;
     public OrderList(WebDriver driver){
         super(driver);
-        this.driver = driver;
         PageFactory.initElements(driver,this);
     }
 

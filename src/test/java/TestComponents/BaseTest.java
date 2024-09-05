@@ -24,7 +24,7 @@ public abstract class BaseTest {
 
     protected WebDriver driver;
     protected User user;
-    protected ArrayList<User> users = new ArrayList<User>();
+    protected ArrayList<User> users = new ArrayList<>();
     protected WebDriver initialazeDriver() throws IOException {
 
 

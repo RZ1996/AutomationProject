@@ -11,7 +11,7 @@ import java.util.Random;
 public class Order extends AbstractComponent {
 
     private final WebDriver driver;
-    private String[] sortiments = {"ZARA COAT 3", "ADIDAS ORIGINAL", "IPHONE 13 PRO"};
+    private final String[] sortiments = {"ZARA COAT 3", "ADIDAS ORIGINAL", "IPHONE 13 PRO"};
     WebElement prod;
     Random random = new Random();
 

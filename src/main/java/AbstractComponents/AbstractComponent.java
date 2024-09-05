@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class AbstractComponent {
 
-    private WebDriver driver;
+    protected WebDriver driver;
 
     public AbstractComponent(WebDriver driver){
         this.driver = driver;
@@ -19,7 +19,7 @@ public class AbstractComponent {
      protected void waitForElementToDisappear() throws InterruptedException {
         Thread.sleep(3000);
     }
-    protected void waitForElementToAppear(WebElement element) throws InterruptedException {
+    protected void waitForElementToAppear(WebElement element){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(element));
     }

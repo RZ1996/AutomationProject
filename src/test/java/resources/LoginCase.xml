@@ -3,7 +3,7 @@
     <listeners>
         <listener class-name="TestComponents.Listeners"/>
     </listeners>
-    <test name="SubmitOrder">
+    <test name="LoginCase">
         <classes>
             <class name="TestCases.LoginCase"/>
         </classes>
