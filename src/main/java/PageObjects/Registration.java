@@ -1,17 +1,23 @@
 package PageObjects;
+import AbstractComponents.AbstractComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Registration  {
+import java.time.Duration;
+
+public class Registration extends AbstractComponent {
 
     protected WebDriver driver;
     protected final String url = "https://rahulshettyacademy.com/client";
     protected final User user;
 
     public Registration(WebDriver driver, User user){
+        super(driver);
         this.driver = driver;
         PageFactory.initElements(driver,this);
         this.user = user;
@@ -45,25 +51,55 @@ public class Registration  {
     @FindBy(xpath ="//button[text()='Login']")
     WebElement loginButton;
 
-    public void registrationOfUser(){
-        driver.get(url);
-        registrationButton.click();
-        firstNameInput.sendKeys(user.firstName);
-        lastNameInput.sendKeys(user.lastName);
-        userEmailInput.sendKeys(user.email);
-        userMobileInput.sendKeys(user.phoneNumber);
-        occupationSelect.click();
-        Select select = new Select(occupationSelect);
-        select.selectByVisibleText(user.occupationValue);
-        if(user.gender.equals("Male"))
-            maleOption.click();
-        else
-            femaleOption.click();
-        passwordInput.sendKeys(user.password);
-        confirmPassword.sendKeys(user.password);
-        checkBox.click();
-        registerButton.click();
-        loginButton.click();
+    public void registrationOfUser(Boolean value){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        if(!value){
+            driver.get(url);
+            registrationButton.click();
+            firstNameInput.sendKeys("");
+            lastNameInput.sendKeys("");
+            userEmailInput.sendKeys("");
+            userMobileInput.sendKeys("");
+            occupationSelect.click();
+            Select select = new Select(occupationSelect);
+            select.selectByVisibleText(user.occupationValue);
+            if(user.gender.equals("Male"))
+                maleOption.click();
+            else
+                femaleOption.click();
+            passwordInput.sendKeys("");
+            confirmPassword.sendKeys("");
+            checkBox.click();
+            registerButton.click();
+            try{
+                wait.until(ExpectedConditions.invisibilityOf(loginButton));
+
+            }catch(Exception e){
+                throw new AssertionError("Failed Test");
+            }
+
+        }
+        else{
+            driver.get(url);
+            registrationButton.click();
+            firstNameInput.sendKeys(user.firstName);
+            lastNameInput.sendKeys(user.lastName);
+            userEmailInput.sendKeys(user.email);
+            userMobileInput.sendKeys(user.phoneNumber);
+            occupationSelect.click();
+            Select select = new Select(occupationSelect);
+            select.selectByVisibleText(user.occupationValue);
+            if(user.gender.equals("Male"))
+                maleOption.click();
+            else
+                femaleOption.click();
+            passwordInput.sendKeys(user.password);
+            confirmPassword.sendKeys(user.password);
+            checkBox.click();
+            registerButton.click();
+            loginButton.click();
+        }
+
     }
 
 }

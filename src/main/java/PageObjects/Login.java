@@ -24,6 +24,7 @@ public class Login extends Registration {
 
 
     public Order loginUserWithNewOrder(){
+        driver.get(url);
         emailInput.sendKeys(user.email);
         passwordInput.sendKeys(user.password);
         loginButton.click();

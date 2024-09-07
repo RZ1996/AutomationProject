@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class SubmitOrder extends BaseTest {
     @Test
-    public void submitOrder() throws  InterruptedException {
+    public void submitOrderWithNewAccount() throws  InterruptedException {
         Order order = new Login(driver,user).loginUserWithNewOrder();
         Payment payment = order.chooseProduct();
         FinishedOrder finishedOrder = payment.paymentFlow();

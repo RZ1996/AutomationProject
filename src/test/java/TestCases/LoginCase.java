@@ -3,12 +3,9 @@ import PageObjects.Login;
 import PageObjects.Registration;
 import TestComponents.BaseTest;
 import org.testng.annotations.Test;
-
 import java.util.Random;
 
 public class LoginCase extends BaseTest {
-    private Random random;
-    private Boolean value;
     @Test
     public void login(){
         random = new Random();
@@ -29,7 +26,8 @@ public class LoginCase extends BaseTest {
 
     @Test
     public void loginWithNewAccount(){
-        new Registration(driver,user).registrationOfUser();
+        value = true;
+        new Registration(driver,user).registrationOfUser(value);
 
     }
 

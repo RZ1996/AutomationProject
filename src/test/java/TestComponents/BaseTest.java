@@ -18,12 +18,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
 
     protected WebDriver driver;
     protected User user;
+    protected Random random;
+    protected Boolean value;
     protected ArrayList<User> users = new ArrayList<>();
     protected WebDriver initialazeDriver() throws IOException {
 
