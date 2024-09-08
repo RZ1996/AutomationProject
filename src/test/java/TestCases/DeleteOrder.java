@@ -7,6 +7,8 @@ public class DeleteOrder extends BaseTest {
 
     @Test
     public void deleteOrder() throws  InterruptedException {
+        value = true;
+        new Registration(driver,user).registrationOfUser(value);
         Order order = new Login(driver,user).loginUserWithNewOrder();
         Payment payment = order.chooseProduct();
         FinishedOrder finishedOrder = payment.paymentFlow();
@@ -14,4 +16,6 @@ public class DeleteOrder extends BaseTest {
         orderList.deleteOrder();
 
     }
+
+
 }
