@@ -2,7 +2,6 @@ package TestCases;
 import PageObjects.*;
 import TestComponents.BaseTest;
 import org.testng.annotations.Test;
-import java.util.Random;
 
 public class SubmitOrder extends BaseTest {
     @Test

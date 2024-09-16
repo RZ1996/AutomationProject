@@ -16,6 +16,10 @@ import org.testng.annotations.BeforeMethod;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
@@ -28,6 +32,7 @@ public abstract class BaseTest {
     protected Random random;
     protected Boolean value;
     protected ArrayList<User> users = new ArrayList<>();
+    private Connection connection;
     protected WebDriver initialazeDriver() throws IOException {
 
 
@@ -68,12 +73,15 @@ public abstract class BaseTest {
         driver = initialazeDriver();
         user = new User();
         users.add(user);
+        connectToDatabase();
+        insertUserToDatabase(user);
 
     }
 
     @AfterMethod
     protected void closeApplication(){
         driver.quit();
+        closeDatabaseConnection();
     }
 
     protected String getScreenShot(String testCaseName, WebDriver driver) throws IOException {
@@ -89,5 +97,45 @@ public abstract class BaseTest {
             System.out.println("Failure to take screenshot " + e);
         }
         return screenshotPath;
+    }
+
+    private void connectToDatabase() {
+        String url = "jdbc:mysql://localhost:3306/qadbt"; // Replace with your database URL
+        String username = "root"; // Replace with your database username
+        String password = "271996"; // Replace with your database password
+        try {
+            connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected to the database successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    private void insertUserToDatabase(User user) {
+        String sql = "INSERT INTO User (firstName, lastName, email, password, phoneNumber, gender, occupationValue) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setString(5, user.getPhoneNumber());
+            preparedStatement.setString(6, user.getGender());
+            preparedStatement.setString(7, user.getOccupationValue());
+            preparedStatement.executeUpdate();
+            System.out.println("User inserted into the database successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void closeDatabaseConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+                System.out.println("Database connection closed.");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

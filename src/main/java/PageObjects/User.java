@@ -1,4 +1,5 @@
 package PageObjects;
+import lombok.Data;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -11,7 +12,7 @@ import java.text.Normalizer;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+@Data
 public class User {
     protected  String firstName;
     protected  String lastName;
@@ -72,4 +73,5 @@ public class User {
         }
         return builder.toString();
     }
+
 }
