@@ -27,13 +27,14 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
 
-    protected WebDriver driver;
+    public WebDriver driver;
     protected User user;
     protected Random random;
     protected Boolean value;
     protected ArrayList<User> users = new ArrayList<>();
     private Connection connection;
-    protected WebDriver initialazeDriver() throws IOException {
+
+    public WebDriver initialazeDriver() throws IOException {
 
 
         Properties prop = new Properties();
@@ -41,23 +42,21 @@ public abstract class BaseTest {
         prop.load(stream);
         String browserName = prop.getProperty("browser");
 
-        if(browserName.equalsIgnoreCase("chrome")){
+        if (browserName.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--disable-search-engine-choice-screen");
-            driver= new ChromeDriver(options);
+            driver = new ChromeDriver(options);
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        }
-        else if (browserName.equalsIgnoreCase("firefox")){
+        } else if (browserName.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
             FirefoxOptions options = new FirefoxOptions();
             options.addArguments("--disable-search-engine-choice-screen");
             driver = new FirefoxDriver(options);
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        }
-        else if(browserName.equalsIgnoreCase("edge")){
+        } else if (browserName.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().setup();
             EdgeOptions options = new EdgeOptions();
             options.addArguments("--disable-search-engine-choice-screen");
@@ -69,19 +68,18 @@ public abstract class BaseTest {
     }
 
     @BeforeMethod
-    protected void launchApplication() throws IOException{
+    public void launchApplication() throws IOException {
         driver = initialazeDriver();
         user = new User();
         users.add(user);
-        connectToDatabase();
-        insertUserToDatabase(user);
+
 
     }
 
     @AfterMethod
-    protected void closeApplication(){
+    public void closeApplication() {
         driver.quit();
-        closeDatabaseConnection();
+
     }
 
     protected String getScreenShot(String testCaseName, WebDriver driver) throws IOException {
@@ -99,43 +97,8 @@ public abstract class BaseTest {
         return screenshotPath;
     }
 
-    private void connectToDatabase() {
-        String url = "jdbc:mysql://localhost:3306/qadbt"; // Replace with your database URL
-        String username = "root"; // Replace with your database username
-        String password = "271996"; // Replace with your database password
-        try {
-            connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected to the database successfully.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    private void insertUserToDatabase(User user) {
-        String sql = "INSERT INTO User (firstName, lastName, email, password, phoneNumber, gender, occupationValue) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setString(5, user.getPhoneNumber());
-            preparedStatement.setString(6, user.getGender());
-            preparedStatement.setString(7, user.getOccupationValue());
-            preparedStatement.executeUpdate();
-            System.out.println("User inserted into the database successfully.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
-    private void closeDatabaseConnection() {
-        if (connection != null) {
-            try {
-                connection.close();
-                System.out.println("Database connection closed.");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+
+
 }
+

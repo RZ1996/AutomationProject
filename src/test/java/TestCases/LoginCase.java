@@ -9,6 +9,7 @@ public class LoginCase extends BaseTest {
     @Test
     public void login(){
         random = new Random();
+
         value = true;
         int index = random.nextInt(users.size());
         new Login(driver,user).loginWithRegisteredAccount(users.get(index),value);
